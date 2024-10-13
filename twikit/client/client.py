@@ -13,7 +13,7 @@ import pyotp
 from httpx import AsyncClient, AsyncHTTPTransport, Response
 from httpx._utils import URLPattern
 
-from .._captcha import Capsolver
+from .._captcha import Capsolver, TwoCaptcha
 from ..bookmark import BookmarkFolder
 from ..community import Community, CommunityMember
 from ..constants import TOKEN
@@ -88,7 +88,7 @@ class Client:
         self,
         language: str | None = None,
         proxy: str | None = None,
-        captcha_solver: Capsolver | None = None,
+        captcha_solver: Capsolver | TwoCaptcha | None = None,
         user_agent: str | None = None,
         **kwargs
     ) -> None:
@@ -480,6 +480,9 @@ class Client:
             if html.authenticity_token is None:
                 response, html = await self.captcha_solver.get_unlock_html()
 
+            if html.blob is None:
+                continue
+            
             result = self.captcha_solver.solve_funcaptcha(html.blob)
             if result['errorId'] == 1:
                 continue

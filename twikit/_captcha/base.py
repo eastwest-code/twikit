@@ -22,7 +22,7 @@ class UnlockHTML(NamedTuple):
 
 class CaptchaSolver:
     client: Client
-    max_attempts: int
+    max_attempts: int = 3
 
     CAPTCHA_URL = 'https://twitter.com/account/access'
     CAPTCHA_SITE_KEY = '0152B4EB-D2DC-460A-89A1-629838B529C9'
