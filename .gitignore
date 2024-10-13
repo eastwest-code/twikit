@@ -1,0 +1,6 @@
+twikit.egg-info/
+
+*.pyc
+build/
+dist/
+examples
