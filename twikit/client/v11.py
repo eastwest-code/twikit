@@ -539,7 +539,7 @@ class V11Client:
         
     async def update_profile_banner(self, image_base64):
         params = {
-            'image': image_base64
+            'banner': image_base64
         }
         
         return await self.base.post(
