@@ -545,5 +545,6 @@ class V11Client:
         return await self.base.post(
             Endpoint.UPDATE_PROFILE_BANNER,
             params=params,
+            data=params,
             headers=self.base._base_headers
         )
